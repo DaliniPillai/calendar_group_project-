@@ -1,0 +1,28 @@
+{
+  "name": "calendar_app",
+  "version": "1.0.0",
+  "description": "group_project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "dalini, robert, issac",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "jest": "^20.0.3",
+    "method-override": "^2.3.9",
+    "morgan": "^1.8.1",
+    "node-sass": "^4.5.3",
+    "nodemon": "^1.11.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "pg-promise": "^5.7.1"
+  }
+}
