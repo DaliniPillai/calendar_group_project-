@@ -1,0 +1,7 @@
+events
+  title
+  location_id
+  time_start
+  time_end
+  note
+  user_id
