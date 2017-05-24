@@ -27,5 +27,7 @@ CREATE TABLE IF NOT EXISTS events (
   location_id INTEGER REFERENCES locations(id),
   time_start BIGINT,
   time_end BIGINT,
+  first_reminder BIGINT,
+  second_reminder BIGINT,
   note VARCHAR(1024)
 );
