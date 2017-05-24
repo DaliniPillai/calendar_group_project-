@@ -50,52 +50,32 @@ Event.findById = id => {
 };
 
 Event.create = event => {
-  let response;
-  let eventPromise;
-  let locationPromise = Location.create({
-    title: event.location_title,
-    address: event.location_address,
-    zip: event.location_zip,
-    city: event.location_city,
-    longitude: event.location_longitude,
-    latitude: event.location_latitude
-  });
-  locationPromise.then(location => {
-    eventPromise = db.one(
-      `
-        INSERT INTO events
-        (
-          title,
-          location_id,
-          time_start,
-          time_end,
-          first_reminder,
-          second_reminder,
-          note
-        )
-        VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *
-      `,
-      [ event.title,
-        location.id,
-        event.time_start,
-        event.time_end,
-        event.first_reminder,
-        event.second_reminder,
-        event.note ]
-    );
-  });
-  Promise.all([locationPromise, eventPromise]).then(values => {
-    console.log(values);
-    response = values;
-  });
-  return response;
+  return db.one(
+    `
+      INSERT INTO events
+      (
+        title,
+        location_id,
+        time_start,
+        time_end,
+        first_reminder,
+        second_reminder,
+        note
+      )
+      VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *
+    `,
+    [ event.title,
+      location.id,
+      event.time_start,
+      event.time_end,
+      event.first_reminder,
+      event.second_reminder,
+      event.note ]
+  );
 };
 
 Event.update = (event, id) => {
-  let response;
-  let eventPromise;
-  let locationPromise = 
-  db.one(
+  return db.one(
     `
       UPDATE quotes SET
         title = $1,

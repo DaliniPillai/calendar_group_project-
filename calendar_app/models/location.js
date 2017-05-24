@@ -3,7 +3,7 @@ const db = require('../db/config');
 const Location = {};
 
 Location.findAll = () => {
-  return db.query(`SELECT * from locations`);
+  return db.query(`SELECT * from locations ORDER BY title ASC`);
 };
 
 Location.findById = id => {
@@ -31,16 +31,6 @@ Location.create = location => {
       location.longitude,
       location.latitude ]
   );
-// CREATE TABLE IF NOT EXISTS locations (
-//   id BIGSERIAL PRIMARY KEY,
-//   user_id INTEGER REFERENCES users(id),
-//   title VARCHAR(255),
-//   address VARCHAR(255),
-//   zip INTEGER,
-//   city VARCHAR(255),
-//   longitude DECIMAL(9,6),
-//   latitude DECIMAL(9,6)
-// );
 };
 
 Location.update = (location, id) => {

@@ -57,4 +57,3 @@ locationsController.destroy = (req, res) => {
 };
 
 module.exports = locationsController;
-
