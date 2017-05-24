@@ -3,7 +3,7 @@ const db = require('../db/config');
 const Location = {};
 
 Location.findAll = () => {
-  return db.query(`SELECT * from locations ORDER BY title ASC`);
+  return db.query(`SELECT * from locations ORDER BY location_title ASC`);
 };
 
 Location.findById = id => {
@@ -15,7 +15,7 @@ Location.create = location => {
     `
       INSERT INTO locations
       (
-        title,
+        location_title,
         address,
         zip,
         city,
@@ -24,7 +24,7 @@ Location.create = location => {
       )
       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *
     `,
-    [ location.title,
+    [ location.location_title,
       location.address,
       location.zip,
       location.city,
@@ -37,7 +37,7 @@ Location.update = (location, id) => {
   return db.one(
     `
       UPDATE locations SET
-        title = $1,
+        location_title = $1,
         address = $2,
         zip = $3,
         city = $4,
@@ -46,7 +46,7 @@ Location.update = (location, id) => {
       WHERE id = $7
       RETURNING *
     `,
-    [ location.title,
+    [ location.location_title,
       location.address,
       location.zip,
       location.city,

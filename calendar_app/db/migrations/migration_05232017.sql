@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS locations (
   id BIGSERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users(id),
-  title VARCHAR(255),
+  location_title VARCHAR(255),
   address VARCHAR(255),
   zip INTEGER,
   city VARCHAR(255),
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS locations (
 CREATE TABLE IF NOT EXISTS events (
   id BIGSERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users(id),
-  title VARCHAR(255),
+  event_title VARCHAR(255),
   location_id INTEGER REFERENCES locations(id),
   time_start BIGINT,
   time_end BIGINT,

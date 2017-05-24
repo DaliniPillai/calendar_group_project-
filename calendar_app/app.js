@@ -32,6 +32,10 @@ app.get('/', function(req, res) {
 const eventRoutes = require('./routes/eventRoutes');
 app.use('/api/events', eventRoutes);
 
+/* locations API route */
+const locationRoutes = require('./routes/locationRoutes');
+app.use('/api/locations', locationRoutes);
+
 /* handling 404 */
 app.get('*', function(req, res) {
   res.status(404).send({message: 'Oops! Not found.'});

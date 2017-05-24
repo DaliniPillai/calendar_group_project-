@@ -33,7 +33,7 @@ eventsController.show = (req, res) => {
 eventsController.create = (req, res) => {
   console.log(req);
   Event.create({
-      title: req.body.title,
+      event_title: req.body.event_title,
       location_id: req.body.location_id,
       time_start: req.body.time_start,
       time_end: req.body.time_end,
@@ -65,7 +65,7 @@ eventsController.edit = (req, res) => {
 
 eventsController.update = (req, res) => {
   Event.update({
-      title: req.body.title,
+      event_title: req.body.event_title,
       location_id: req.body.location_id,
       time_start: req.body.time_start,
       time_end: req.body.time_end,

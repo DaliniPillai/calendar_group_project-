@@ -31,7 +31,7 @@ locationsController.show = (req, res) => {
 locationsController.create = (req, res) => {
   console.log(req);
   Location.create({
-      title: req.body.title,
+      location_title: req.body.location_title,
       address: req.body.address,
       zip: req.body.zip,
       city: req.body.city,

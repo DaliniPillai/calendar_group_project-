@@ -8,8 +8,8 @@ Event.findAll = () => {
     `
       SELECT
         events.id,
-        events.title,
-        locations.title,
+        events.event_title,
+        locations.location_title,
         locations.address,
         locations.zip,
         locations.city,
@@ -31,8 +31,8 @@ Event.findById = id => {
     `
       SELECT
         events.id,
-        events.title,
-        locations.title,
+        events.event_title,
+        locations.location_title,
         locations.address,
         locations.zip,
         locations.city,
@@ -54,7 +54,7 @@ Event.create = event => {
     `
       INSERT INTO events
       (
-        title,
+        event_title,
         location_id,
         time_start,
         time_end,
@@ -64,7 +64,7 @@ Event.create = event => {
       )
       VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *
     `,
-    [ event.title,
+    [ event.event_title,
       location.id,
       event.time_start,
       event.time_end,
@@ -77,18 +77,18 @@ Event.create = event => {
 Event.update = (event, id) => {
   return db.one(
     `
-      UPDATE quotes SET
-        title = $1,
+      UPDATE events SET
+        event_title = $1,
         location_id = $2,
         time_start = $3,
         time_end = $4,
         first_reminder = $5,
-        seconde_reminder = $6,
+        second_reminder = $6,
         note = $7
       WHERE id = $8
       RETURNING *
     `,
-    [ event.title,
+    [ event.event_title,
       event.location_id,
       event.time_start,
       event.time_end,
