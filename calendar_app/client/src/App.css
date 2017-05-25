@@ -9,7 +9,7 @@
 
 .App-header {
   background-color: #222;
-  width: 260px;
+  width: 19%;
   height: 5%;
   padding: 20px;
   color: white;
@@ -28,7 +28,16 @@
 
 .App-widget {
   background-color: purple;
-  width: 300px;
+  width: 22.5%;
   height: 20%;
   overflow: auto;
+}
+.addButton {
+  border-radius: 20px;
+  width: 15%;
+  height: 60px;
+
+}
+.plus {
+  font-size: 20px;
 }

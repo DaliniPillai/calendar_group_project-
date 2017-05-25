@@ -24,7 +24,6 @@ handleEventEdit(event) {
 }
 
   render() {
-    
   	  var settings = {
     	dots: true
     }
@@ -43,7 +42,10 @@ handleEventEdit(event) {
               width={300}
               height={200}
             />
-            <h3>Agenda View</h3>
+            <button className="addButton"> 
+              <p className="plus">+</p>
+            </button>
+              
           </Carousel>
         </div>
       </div>
