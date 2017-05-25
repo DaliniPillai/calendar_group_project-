@@ -28,9 +28,16 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
 
-/* tweeds API route */
-const tweedRoutes = require('./routes/calendarRoutes');
-app.use('/api/calendar', tweedRoutes);
+
+/* events API route */
+const eventRoutes = require('./routes/eventRoutes');
+app.use('/api/events', eventRoutes);
+
+/* locations API route */
+const locationRoutes = require('./routes/locationRoutes');
+app.use('/api/locations', locationRoutes);
+
+
 
 /* handling 404 */
 app.get('*', function(req, res) {
