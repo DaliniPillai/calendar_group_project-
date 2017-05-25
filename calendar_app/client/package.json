@@ -2,19 +2,16 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-
   "proxy": "http://localhost:3001/",
-
   "dependencies": {
+    "nuka-carousel": "^2.0.4",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-addons-css-transition-group": "^15.5.2",
+    "react-dom": "^15.5.4",
+    "react-infinite-calendar": "^2.3.1"
   },
   "devDependencies": {
-
-    "react-scripts": "1.0.6",
-
     "react-scripts": "1.0.5"
-
   },
   "scripts": {
     "start": "react-scripts start",
