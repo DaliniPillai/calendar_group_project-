@@ -28,6 +28,7 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
 
+
 /* events API route */
 const eventRoutes = require('./routes/eventRoutes');
 app.use('/api/events', eventRoutes);
@@ -35,6 +36,8 @@ app.use('/api/events', eventRoutes);
 /* locations API route */
 const locationRoutes = require('./routes/locationRoutes');
 app.use('/api/locations', locationRoutes);
+
+
 
 /* handling 404 */
 app.get('*', function(req, res) {
