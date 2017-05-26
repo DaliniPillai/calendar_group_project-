@@ -6,18 +6,31 @@ import 'react-infinite-calendar/styles.css';
 import Carousel from 'nuka-carousel';
 import Widget from './components/Widget';
 import Agenda from './components/Agenda';
+import DayView from './components/DayView';
+
 
 class App extends Component {
   constructor(props) {
     super(props);
+    const currentDay = new Date();
+    currentDay.setHours(0);
+    currentDay.setMinutes(0);
+    currentDay.setSeconds(0);
+    currentDay.setMilliseconds(0);
+    console.log(currentDay);
     this.state = {
       eventsData: [],
+      locationsData: [],
+      currentTime: new Date(),
+      selectedDay: currentDay,
       inputEventValue: '',
     }
     
     this.handleInputEventChange = this.handleInputEventChange.bind(this);
     this.handleEventEdit = this.handleEventEdit.bind(this);
   }
+
+  
 
   fetchAllEvents() {
     fetch('/api/events')
@@ -33,7 +46,15 @@ class App extends Component {
   }
 
   componentDidMount() {
+    setInterval(() => {
+      this.setState((prevState) => {
+        return {
+          currentTime: new Date()
+        };
+      })
+    }, 1000)
     this.fetchAllEvents();
+
   }
 
 handleInputEventChange(event) {
@@ -44,12 +65,15 @@ handleEventEdit(event) {
 }
 
   render() {
+    // console.log(this.state.currentTime);
   	  var settings = {
     	dots: true
     }
     return (
       <div className="App">
         <div className="App-header">
+        
+        <p>{this.state.currentTime.toString()}</p>
           <h2>Welcome to DRI Cal</h2>
         </div>
         <div className="App-widget">
@@ -61,21 +85,27 @@ handleEventEdit(event) {
             <InfiniteCalendar
               width={300}
               height={200}
+              onSelect={((date) => {
+                alert('You selected: ' + date.toString());
+                if(this.state.selectedDay.valueOf() === date.valueOf()) {
+                  console.log("equal");
+                }else {
+                  console.log("not equal");
+
+                }
+                this.setState((prevState) => {
+                  return {selectedDay: date};
+                })
+              })}
             />
-            <div className="dayView">
-            <button className="addEventButton"> 
-              <p className="plus">+</p>
-
-            </button><br/>
-            <button className="event"><p>1:00pm-2:00pm</p><h1>Brunch</h1></button><br/>
-            <button className="event"><p>4:00pm-5:00pm</p><h1>Gym</h1></button><br/>
-            <button className="event"><p>6:00pm-7:00pm</p><h1>Dinner</h1></button><br/>
-             <button className="event"><p>6:00pm-7:00pm</p><h1>Dinner</h1></button><br/>
-            </div>
-          
-
-            </button>
+           
             <Agenda eventsData={this.state.eventsData}/>
+            <DayView className="dayView"
+              eventsData={this.state.eventsData}
+              selectedDay={this.state.selectedDay}
+
+
+            />
 
               
           </Carousel>
