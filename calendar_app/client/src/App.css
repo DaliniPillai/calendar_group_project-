@@ -41,3 +41,9 @@
 .plus {
   font-size: 20px;
 }
+.dayView {
+  width: 250px;
+  height: 250px;
+  overflow: scroll;
+  margin: 0 auto;
+}
