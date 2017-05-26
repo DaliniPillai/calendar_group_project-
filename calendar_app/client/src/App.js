@@ -7,6 +7,7 @@ import Carousel from 'nuka-carousel';
 import Widget from './components/Widget';
 import Agenda from './components/Agenda';
 import DayView from './components/DayView';
+import SingleDayView from './components/SingleDayView';
 
 
 class App extends Component {
@@ -23,12 +24,15 @@ class App extends Component {
       locationsData: [],
       currentTime: new Date(),
       selectedDay: currentDay,
+      selectedEvent: 0,
       inputEventValue: '',
+      isLoaded: false,
       currentSlide: 0,
     }
     
     this.handleInputEventChange = this.handleInputEventChange.bind(this);
-    this.handleEventEdit = this.handleEventEdit.bind(this);
+    this.onEventSelect = this.onEventSelect.bind(this);
+    
   }
 
   
@@ -40,29 +44,48 @@ class App extends Component {
       })
       .then(jsonRes => {
         console.log(jsonRes);
-        this.setState({
-          eventsData: jsonRes.eventsData
-        });
+        setInterval(() => {
+          this.setState({
+            eventsData: jsonRes.eventsData,
+            currentTime: new Date(),
+            isLoaded: true
+      
+          });
+        }, 1000);
       });
   }
 
   componentDidMount() {
-    setInterval(() => {
-      this.setState((prevState) => {
-        return {
-          currentTime: new Date()
-        };
-      })
-    }, 1000)
     this.fetchAllEvents();
+    // setInterval(() => {
+    //   this.setState((prevState) => {
+    //     return {
+    //       currentTime: new Date()
+    //     };
+    //   })
+    // }, 1000)
+    
 
   }
 
 handleInputEventChange(event) {
   this.setState({handleInputEventChange: event.target.value});
 }
-handleEventEdit(event) {
-  event.preventDefault();
+onEventSelect(id) {
+  let idx;
+  for(let i=0; i < this.state.eventsData; i++) {
+    if(this.state.eventsData[i].id === id) {
+      idx=i;
+      break;
+    }
+  }
+  console.log(idx);
+  this.setState((prevState) => {
+    return {
+      selectedEvent: idx,
+      currentSlide: 3,
+    }
+  })
 }
 
   render() {
@@ -90,6 +113,7 @@ handleEventEdit(event) {
                 alert('You selected: ' + date.toString());
                 if(this.state.selectedDay.valueOf() === date.valueOf()) {
                   console.log("equal");
+                  
                 }else {
                   console.log("not equal");
 
@@ -108,7 +132,16 @@ handleEventEdit(event) {
             <DayView className="dayView"
               eventsData={this.state.eventsData}
               selectedDay={this.state.selectedDay}
+              onEventSelect={this.onEventSelect}
             />
+
+            {this.state.isLoaded === true ? <SingleDayView className="dayView"
+
+              eventsData={this.state.eventsData}
+              selectedEvent={this.state.selectedEvent}
+
+              
+            /> : ''}
 
               
           </Carousel>
