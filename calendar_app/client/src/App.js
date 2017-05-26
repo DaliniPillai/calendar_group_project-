@@ -5,17 +5,37 @@ import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css';
 import Carousel from 'nuka-carousel';
 import Widget from './components/Widget';
+import Agenda from './components/Agenda';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      eventsData: [],
       inputEventValue: '',
     }
     
     this.handleInputEventChange = this.handleInputEventChange.bind(this);
     this.handleEventEdit = this.handleEventEdit.bind(this);
   }
+
+  fetchAllEvents() {
+    fetch('/api/events')
+      .then(res => {
+        return res.json();
+      })
+      .then(jsonRes => {
+        console.log(jsonRes);
+        this.setState({
+          eventsData: jsonRes.eventsData
+        });
+      });
+  }
+
+  componentDidMount() {
+    this.fetchAllEvents();
+  }
+
 handleInputEventChange(event) {
   this.setState({handleInputEventChange: event.target.value});
 }
@@ -45,6 +65,7 @@ handleEventEdit(event) {
             <button className="addButton"> 
               <p className="plus">+</p>
             </button>
+            <Agenda eventsData={this.state.eventsData}/>
               
           </Carousel>
         </div>
