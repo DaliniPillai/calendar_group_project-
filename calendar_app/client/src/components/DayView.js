@@ -37,11 +37,13 @@ class DayView extends Component {
 
           return (
             <li key={i}>
-              {/* <button className="event"><p>{timeStartHours + ':' + startMins + startAmPm + '-' + timeEndHours + ':' + endMins + endAmPm }</p><h1>{event.event_title}</h1></button> */}
+        
               <button className="event">
-                <p>{new Date(parseInt(event.time_start)).toString()}</p>
-                <p>{new Date(parseInt(event.time_end)).toString()}</p>
+                <p>{timeStartHours + ':' + startMins + startAmPm + '-' + timeEndHours + ':' + endMins + endAmPm }</p>
                 <h1>{event.event_title}</h1>
+                {/*<p>{new Date(parseInt(event.time_start)).toString()}</p>
+                <p>{new Date(parseInt(event.time_end)).toString()}</p> */}
+                
               </button>
             
             </li>

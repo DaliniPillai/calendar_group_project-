@@ -24,6 +24,7 @@ class App extends Component {
       currentTime: new Date(),
       selectedDay: currentDay,
       inputEventValue: '',
+      currentSlide: 0,
     }
     
     this.handleInputEventChange = this.handleInputEventChange.bind(this);
@@ -80,8 +81,8 @@ handleEventEdit(event) {
           <Widget/>
         </div>
         <div className="App-cal">
-          <Carousel>
-          
+          <Carousel slideIndex={this.state.currentSlide}>
+           
             <InfiniteCalendar
               width={300}
               height={200}
@@ -94,7 +95,11 @@ handleEventEdit(event) {
 
                 }
                 this.setState((prevState) => {
-                  return {selectedDay: date};
+                  return {
+                    selectedDay: date,
+                    currentSlide: 2,
+                  };
+                          
                 })
               })}
             />
@@ -103,8 +108,6 @@ handleEventEdit(event) {
             <DayView className="dayView"
               eventsData={this.state.eventsData}
               selectedDay={this.state.selectedDay}
-
-
             />
 
               
