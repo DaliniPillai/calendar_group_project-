@@ -70,7 +70,7 @@ handleEventEdit(event) {
             <button className="event"><p>1:00pm-2:00pm</p><h1>Brunch</h1></button><br/>
             <button className="event"><p>4:00pm-5:00pm</p><h1>Gym</h1></button><br/>
             <button className="event"><p>6:00pm-7:00pm</p><h1>Dinner</h1></button><br/>
-            <button className="event"><p>8:00pm-9:00pm</p><h1>Project</h1></button><br/>
+             <button className="event"><p>6:00pm-7:00pm</p><h1>Dinner</h1></button><br/>
             </div>
           
 
