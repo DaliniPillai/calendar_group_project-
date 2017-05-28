@@ -8,6 +8,7 @@ import Widget from './components/Widget';
 import Agenda from './components/Agenda';
 import DayView from './components/DayView';
 import SingleDayView from './components/SingleDayView';
+import AddEvent from './components/AddEvent';
 
 
 class App extends Component {
@@ -55,6 +56,19 @@ class App extends Component {
       });
   }
 
+  fetchAllLocations() {
+    fetch('/api/locations')
+      .then(res => {
+        return res.json();
+      })
+      .then(jsonRes => {
+        console.log(jsonRes);
+        this.setState({
+          locationsData: jsonRes.locationsData
+        });
+      });
+  }
+
   componentDidMount() {
     this.fetchAllEvents();
     // setInterval(() => {
@@ -65,6 +79,7 @@ class App extends Component {
     //   })
     // }, 1000)
     
+    this.fetchAllLocations();
 
   }
 
@@ -143,6 +158,9 @@ onEventSelect(id) {
               
             /> : ''}
 
+            <AddEvent
+              className="dayView"
+            />
               
           </Carousel>
         </div>
