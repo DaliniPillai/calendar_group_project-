@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class AddEvent extends Component {
+class EventEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,7 +61,7 @@ class AddEvent extends Component {
   render() {
     return (
       <div>
-        <h1>Add New Event</h1>
+        <h1>Edit Event</h1>
         <h2>{this.props.selectedDay.toDateString()}</h2>
         <form
           className="add-event-form"
@@ -170,4 +170,4 @@ class AddEvent extends Component {
   }
 }
 
-export default AddEvent;
+export default EventEdit;

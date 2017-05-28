@@ -9,7 +9,7 @@ import Agenda from './components/Agenda';
 import DayView from './components/DayView';
 import SingleDayView from './components/SingleDayView';
 import AddEvent from './components/AddEvent';
-
+import EventEdit from './components/EventEdit';
 
 class App extends Component {
   constructor(props) {
@@ -33,6 +33,8 @@ class App extends Component {
     
     this.handleInputEventChange = this.handleInputEventChange.bind(this);
     this.onEventSelect = this.onEventSelect.bind(this);
+    this.onAddEventClick = this.onAddEventClick.bind(this);
+    this.onEventEdit = this.onEventEdit.bind(this);
     
   }
 
@@ -45,11 +47,15 @@ class App extends Component {
       })
       .then(jsonRes => {
         console.log(jsonRes);
+        this.setState({
+          eventsData: jsonRes.eventsData,
+          isLoaded: true
+        })
         setInterval(() => {
-          this.setState({
-            eventsData: jsonRes.eventsData,
-            currentTime: new Date(),
-            isLoaded: true
+          this.setState((prevState) => {
+            
+            return {currentTime: new Date() }
+            
       
           });
         }, 1000);
@@ -83,18 +89,41 @@ class App extends Component {
 
   }
 
+onAddEventClick() {
+  this.setState((prevState) => {
+    return {
+      currentSlide: 4,
+    };
+  });
+}
+
+onEventEdit(id) {
+  let idx=0;
+  while(this.state.eventsData[idx].id !== id) {
+    idx++;
+  }
+  console.log("IDXXXXX", idx);
+  console.log(this.state.eventsData[0]);
+  console.log(id);
+  this.setState((prevState) => {
+    return {
+      selectedEvent: idx,
+      currentSlide: 5,
+    }
+  })
+}
+
 handleInputEventChange(event) {
   this.setState({handleInputEventChange: event.target.value});
 }
 onEventSelect(id) {
-  let idx;
-  for(let i=0; i < this.state.eventsData; i++) {
-    if(this.state.eventsData[i].id === id) {
-      idx=i;
-      break;
-    }
+  let idx=0;
+  while(this.state.eventsData[idx].id !== id) {
+    idx++;
   }
-  console.log(idx);
+  console.log("IDXXXXX", idx);
+  console.log(this.state.eventsData[0]);
+  console.log(id);
   this.setState((prevState) => {
     return {
       selectedEvent: idx,
@@ -119,13 +148,21 @@ onEventSelect(id) {
           <Widget/>
         </div>
         <div className="App-cal">
-          <Carousel slideIndex={this.state.currentSlide}>
+          <Carousel 
+          slideIndex={this.state.currentSlide}
+          afterSlide={((slide) => {
+            this.setState((prevState) => {
+              return {currentSlide: slide }
+
+            })
+          })}
+          >
            
             <InfiniteCalendar
-              width={300}
-              height={200}
+              
+              
+              
               onSelect={((date) => {
-                alert('You selected: ' + date.toString());
                 if(this.state.selectedDay.valueOf() === date.valueOf()) {
                   console.log("equal");
                   
@@ -148,18 +185,26 @@ onEventSelect(id) {
               eventsData={this.state.eventsData}
               selectedDay={this.state.selectedDay}
               onEventSelect={this.onEventSelect}
+              onAddEventClick={this.onAddEventClick}
             />
 
-            {this.state.isLoaded === true ? <SingleDayView className="dayView"
+            { this.state.isLoaded === true ? 
+            <SingleDayView className="dayView"
 
               eventsData={this.state.eventsData}
               selectedEvent={this.state.selectedEvent}
-
+              isLoaded={this.state.isLoaded}
+              onEventEdit={this.onEventEdit}
               
-            /> : ''}
+            /> : "" }
 
             <AddEvent
               className="dayView"
+              selectedDay={this.state.selectedDay}
+            />
+            <EventEdit 
+              
+              selectedDay={this.state.selectedDay}
             />
               
           </Carousel>

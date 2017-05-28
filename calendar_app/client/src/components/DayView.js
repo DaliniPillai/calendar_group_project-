@@ -16,10 +16,10 @@ class DayView extends Component {
     });
     return (
       <div className="dayView">
-        <button className="addEventButton"> 
+        <button onClick={this.props.onAddEventClick} className="addEventButton"> 
           <p className="plus">+</p>
         </button>
-        <button className="event"><p>1:00pm-2:00pm</p><h1>Brunch</h1></button><br/>
+        
         {dayEvents.map((event, i) => {
           //      console.log(new Date(parseInt(event.time_start)));
           //  console.log(new Date(parseInt(event.time_end)));
