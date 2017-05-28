@@ -7,6 +7,7 @@ import Carousel from 'nuka-carousel';
 import Widget from './components/Widget';
 import Agenda from './components/Agenda';
 import DayView from './components/DayView';
+import AddEvent from './components/AddEvent';
 
 
 class App extends Component {
@@ -46,6 +47,19 @@ class App extends Component {
       });
   }
 
+  fetchAllLocations() {
+    fetch('/api/locations')
+      .then(res => {
+        return res.json();
+      })
+      .then(jsonRes => {
+        console.log(jsonRes);
+        this.setState({
+          locationsData: jsonRes.locationsData
+        });
+      });
+  }
+
   componentDidMount() {
     setInterval(() => {
       this.setState((prevState) => {
@@ -55,6 +69,7 @@ class App extends Component {
       })
     }, 1000)
     this.fetchAllEvents();
+    this.fetchAllLocations();
 
   }
 
@@ -109,7 +124,9 @@ handleEventEdit(event) {
               eventsData={this.state.eventsData}
               selectedDay={this.state.selectedDay}
             />
-
+            <AddEvent
+              className="dayView"
+            />
               
           </Carousel>
         </div>

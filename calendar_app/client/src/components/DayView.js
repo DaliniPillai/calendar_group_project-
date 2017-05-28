@@ -21,8 +21,8 @@ class DayView extends Component {
         </button>
         <button className="event"><p>1:00pm-2:00pm</p><h1>Brunch</h1></button><br/>
         {dayEvents.map((event, i) => {
-               console.log(new Date(parseInt(event.time_start)));
-           console.log(new Date(parseInt(event.time_end)));
+          //      console.log(new Date(parseInt(event.time_start)));
+          //  console.log(new Date(parseInt(event.time_end)));
           let timeStartHours = new Date(parseInt(event.time_start)).getHours();
           let timeEndHours = new Date(parseInt(event.time_end)).getHours();
           const timeStartMins = new Date(parseInt(event.time_start)).getMinutes();
