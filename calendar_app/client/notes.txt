@@ -1,0 +1,8 @@
+next/prev into arrows and placed nicely
+center calendar with no border
+agenda view with timer on first
+styling
+database add edit delete
+locations select or create
+
+day view am pm display (timeConversions issue)

@@ -65,7 +65,7 @@ Event.create = event => {
       VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *
     `,
     [ event.event_title,
-      location.id,
+      event.location_id,
       event.time_start,
       event.time_end,
       event.first_reminder,
