@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css';
@@ -160,13 +159,11 @@ onEventSelect(id) {
     }
     return (
       <div className="App">
+      <Widget/>
         <div className="App-header">
-        
-        <p>{this.state.currentTime.toString()}</p>
-          <h2>Welcome to DRI Cal</h2>
         </div>
         <div className="App-widget">
-          <Widget/>
+          
         </div>
         <div className="App-cal">
           <Carousel 
@@ -179,7 +176,7 @@ onEventSelect(id) {
           })}
           >
            
-            <InfiniteCalendar
+            <InfiniteCalendar className="cal"
               
               
               

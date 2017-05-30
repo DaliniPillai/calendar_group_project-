@@ -160,7 +160,7 @@ class EventEdit extends Component {
         <h1>Edit Event</h1>
         <h2>{this.props.selectedDay.toDateString()}</h2>
         <form
-          className="add-event-form"
+          className="addEventForm"
           onSubmit={this.onSubmit}
         >
           <input
@@ -265,7 +265,7 @@ class EventEdit extends Component {
             name="id"
             value={this.props.eventsData[this.props.selectedEvent].id}
           />
-          <button>Save</button>
+          <button className="save">Save</button>
         </form>
       </div>
     );

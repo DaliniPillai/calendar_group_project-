@@ -1,30 +1,35 @@
 import React, { Component } from 'react';
-import Carousel from 'nuka-carousel';
+
 
 const BASE_URL = 'http://api.openweathermap.org/data/2.5/weather';
 const API_KEY = '2e0f645d32cfc88886adc65fe800c89b';
+const zip = 10024;
 
 class Widget extends Component {
     
     constructor() {
         super();
         this.state = { 
-        inputZipValue: null,
-        location: null,
-        temp: null,
-        description: null,
-        min: null,
-        max: null,
+            zip: null,
+            location: null,
+            temp: null,
+            description: null,
+            min: null,
+            max: null,
+            find: this.find.bind(this)
         }
+        this.find = this.find.bind(this);
+        
     }
 
-    findWeather(zip) {
-        fetch(`${BASE_URL}?q=${zip},us&appid=${API_KEY}`)
+
+    find(zip) {
+        fetch(`${BASE_URL}?q=10024,us&appid=${API_KEY}`)
         .then((res) => {
             res.json()
             .then((json) => {
                 console.log('json: ', json);
-                console.log('fetch: ', `${BASE_URL}?q=${zip},us&appid=${API_KEY}`);
+                console.log('fetch: ', `${BASE_URL}?q=10024,us&appid=${API_KEY}`);
 
                 const location = json.name;
                 const temp = `${Math.round(json.main.temp *  9/5 - 459.67)}°F`;
@@ -41,18 +46,25 @@ class Widget extends Component {
                     min: min,
                     max: max,
                 });
+                console.log('temp: ' + temp);
                 return;
             });
         });
     }
 
+    
+
     render() {
         return (
-            <Carousel slidesToShow={1} cellAlign="center">
-                <h4 id="location">Location: {this.props.location}</h4>
-                <h1 id="temp">Temp: {this.props.temp}</h1>
-                <h2 id="description">Description: {this.props.description}</h2>
-            </Carousel>
+            
+                <div className="weather">
+                    <h3 id="location"> {this.state.location}</h3>
+                    <h3 className="temp">{this.state.temp}</h3>
+                    <h3 id="description"> {this.state.description}</h3>
+                    <button className="getWeather"onClick={this.state.find}>Click for Weather</button>
+                    <button className="home"><a href="/">Take Me Home</a></button>
+                </div>
+            
         );
 
     }

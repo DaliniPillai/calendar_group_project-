@@ -23,10 +23,10 @@ class SingleDayView extends Component {
           this.props.eventsData[this.props.selectedEvent].time_end
         )}
         </p>
-        <button onClick={() => this.props.onEventEdit(this.props.eventsData[this.props.selectedEvent].id)}>
-          <p>Edit</p>
+        <button className="edit" onClick={() => this.props.onEventEdit(this.props.eventsData[this.props.selectedEvent].id)}>
+          Edit
         </button>
-        <button><p>Delete</p></button>
+        <button className="delete">Delete</button>
   
           
        

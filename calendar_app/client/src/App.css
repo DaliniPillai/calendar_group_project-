@@ -1,18 +1,24 @@
+
 .App {
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  background-color: #606060;
+  font-family: Lato;
 }
 
 
 .App-header {
-  background-color: #222;
-  width: 19%;
-  height: 5%;
-  padding: 20px;
-  color: white;
+  background-color: white;
+  width: 100%;
+  height: 3em;
+  /*padding: 20px;*/
+  color: #448AFF;
+  font-size: 15px;
+  line-height: 0;
+  display: none;
 }
 
 .App-intro {
@@ -23,16 +29,65 @@
   width: 100%;
   height: 100%;
   margin-bottom: 30px;
-  border: 3px solid black;
+  /*border: 3px solid black;*/
 }
 
 .App-widget {
-  background-color: purple;
-  width: 22.5%;
+  background-color:#fff;
+  border-radius: 25px;
+  width: 55%;
   height: 20%;
-  overflow: auto;
+  /*overflow: auto;*/
 }
-.addEventButton {
+
+/*links*/
+a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.weather {
+  background: #444b58;
+  padding: 20px;
+  margin-top: 10px;
+  border-radius: 10px;
+  
+
+}
+
+.getWeather, .save, .edit, .delete, .home {
+  color: #fff;
+  background-color: #448AFF;
+  padding: 20px;
+  font-size: 20px;
+  border-radius: 5px;
+  text-align: center;
+  user-select: none;
+  border: 1px solid transparent;
+  transition: all .2s ease-in-out;
+  text-decoration: none;
+
+}
+
+.edit{
+    margin: 0 10px;
+    background: #FF5722;
+}
+
+.delete{
+    background: #ff1100;
+}
+
+.home {
+    background: #4caf50;
+    display: block;
+    margin: 10px 0;
+    width: 100%;
+}
+.temp {
+  color: #fff;
+}
+.addButton {
   border-radius: 20px;
   width: 15%;
   height: 60px;
@@ -40,10 +95,128 @@
 }
 .plus {
   font-size: 20px;
+  border: #fff;
+  border-radius: 100%;
+  width: 40px;
 }
-.dayView {
-  width: 250px;
-  height: 250px;
-  overflow: scroll;
+
+
+
+.slider-decorator-0 button{
+  border-radius: 10px;
+  margin: 5px;
+}
+.slider-decorator-1 button{
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.slider-decorator-2{
+  visibility: hidden;
+}
+
+.Cal__Header__date {
+  color: white;
+}
+
+h3 {
+  color: #fff;
+}
+/* plus button */
+.plus {
+  color: #fff;
+  background-color: #448AFF;
+  padding: 15px;
+  font-size: 30px;
+  border-radius: 40px;
+  text-align: center;
+  user-select: none;
+  border: 1px solid transparent;
+  transition: all .2s ease-in-out;
+  text-decoration: none;
+   
+}
+
+.addEventButton {
+  /*background: #fff;
+  border: #fff;*/
+  border:none;
+  background: transparent;
+}
+.cal {
   margin: 0 auto;
+  padding-top: 10px;
+}
+.event {
+    border: none;
+    background: #444b58;
+    color: #fff;
+    width: 100%;
+    border-bottom: 1px solid #000;
+}
+
+/*styling for forms*/
+.addEventForm {
+    border: none;
+    padding: 30px;
+    -webkit-box-shadow: 0 2px 3px rgba(0,0,0,.07);
+    background: #444b58;
+    margin: 40px auto;
+    padding: 65px 70px;
+    color: #fff;
+}
+
+.addEventForm  select {
+    border: 1px solid #ccc;
+    font-size: 16px;
+    height: 34px;
+    width: 78px;
+    margin: 0 10px 10px;
+}
+
+.addEventForm input {
+    display: block;
+    width: 92%;
+    height: 38px;
+    padding: 1% 4%;
+    font-size: 14px;
+    line-height: 1.71428571;
+    color: #4d5966;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #c5ccd3;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.addEventForm input.eventFormSubmit{
+  width: 100%;
+  background: lightcoral;
+}
+
+.addEventForm  label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+/* Add event button h1 */
+
+/* dayview */
+.dayView{
+    background: #444b58;
+    padding: 20px;
+    margin-top: 10px;
+    color: #fff;
+}
+
+
+
+@media screen and (min-width: 1025px) {
+
+
 }

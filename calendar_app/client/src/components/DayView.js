@@ -38,8 +38,9 @@ class DayView extends Component {
 
           return (
             <li key={i}>
-        
+           
               <button className="event" onClick={() => this.props.onEventSelect(event.id)}>
+                
                 <p>{timeStartHours + ':' + startMins + startAmPm + '-' + timeEndHours + ':' + endMins + endAmPm }</p>
                 <h1>{event.event_title}</h1>
                 {/*<p>{new Date(parseInt(event.time_start)).toString()}</p>

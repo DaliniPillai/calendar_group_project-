@@ -160,7 +160,7 @@ class AddEvent extends Component {
         <h1>Add New Event</h1>
         <h2>{this.props.selectedDay.toDateString()}</h2>
         <form
-          className="add-event-form"
+          className="addEventForm"
           onSubmit={this.onSubmit}
         >
           <input
@@ -259,7 +259,7 @@ class AddEvent extends Component {
             onChange={this.handleNoteInput}
             placeholder="Note"
           /><br />
-          <button>Save</button>
+          <button className="save">Save</button>
         </form>
       </div>
     );
