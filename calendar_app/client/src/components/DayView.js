@@ -16,6 +16,7 @@ class DayView extends Component {
     });
     return (
       <div className="dayView">
+        <h2>{this.props.selectedDay.toDateString()}</h2>
         <button onClick={this.props.onAddEventClick} className="addEventButton"> 
           <p className="plus">+</p>
         </button>

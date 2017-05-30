@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import timeConversions from '../library/timeConversions';
 
 class AddEvent extends Component {
   constructor(props) {
@@ -6,21 +7,88 @@ class AddEvent extends Component {
     this.state = {
       eventTitleValue: '',
       locationTitleValue: '',
-      timeStartValue: '',
-      timeEndValue: '',
+      timeStartHoursValue: '12',
+      timeStartMinsValue: '00',
+      timeStartAmPmValue: 'am',
+      timeEndHoursValue: '12',
+      timeEndMinsValue: '00',
+      timeEndAmPmValue: 'am',
       noteValue: '',
     }
     this.handleEventTitleInput = this.handleEventTitleInput.bind(this);
     this.handleLocationTitleInput = this.handleLocationTitleInput.bind(this);
-    this.handleTimeStartInput = this.handleTimeStartInput.bind(this);
-    this.handleTimeEndInput = this.handleTimeEndInput.bind(this);
+    this.handleTimeStartHoursInput = this.handleTimeStartHoursInput.bind(this);
+    this.handleTimeStartMinsInput = this.handleTimeStartMinsInput.bind(this);
+    this.handleTimeStartAmPmInput = this.handleTimeStartAmPmInput.bind(this);
+    this.handleTimeEndHoursInput = this.handleTimeEndHoursInput.bind(this);
+    this.handleTimeEndMinsInput = this.handleTimeEndMinsInput.bind(this);
+    this.handleTimeEndAmPmInput = this.handleTimeEndAmPmInput.bind(this);
     this.handleNoteInput = this.handleNoteInput.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
   onSubmit(event) {
-    console.log('submitted');
     event.preventDefault();
+    fetch('/api/events', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        event_title: this.state.eventTitleValue,
+        location_id: 1,
+        time_start: timeConversions.timeAmPmToEpoch(
+          this.props.selectedDay.getFullYear(),
+          this.props.selectedDay.getMonth(),
+          this.props.selectedDay.getDate(),
+          this.state.timeStartHoursValue,
+          this.state.timeStartMinsValue,
+          this.state.timeStartAmPmValue
+        ),
+        time_end: timeConversions.timeAmPmToEpoch(
+          this.props.selectedDay.getFullYear(),
+          this.props.selectedDay.getMonth(),
+          this.props.selectedDay.getDate(),
+          this.state.timeEndHoursValue,
+          this.state.timeEndMinsValue,
+          this.state.timeEndAmPmValue
+        ),
+        note: this.state.noteValue
+      })
+    })
+    .then(res => {
+      return res.json();
+    })
+    .then(jsonRes => {
+      console.log(jsonRes);
+      if (jsonRes.message === 'ok') {
+        const newEvent = {
+          id: jsonRes.event.id,
+          event_title: jsonRes.event.event_title,
+          location_id: jsonRes.event.location_id,
+          time_start: jsonRes.event.time_start,
+          time_end: jsonRes.event.time_end,
+          first_reminder: jsonRes.event.first_reminder,
+          second_reminder: jsonRes.event.second_reminder
+        };
+        this.props.onAddEvent(newEvent);
+        this.setState(prevState => {
+          return {
+            eventTitleValue: '',
+            locationTitleValue: '',
+            timeStartHoursValue: '',
+            timeStartMinsValue: '',
+            timeStartAmPmValue: '',
+            timeEndHoursValue: '',
+            timeEndMinsValue: '',
+            timeEndAmPmValue: '',
+            noteValue: '',
+          };
+        });
+      } else {
+        console.log('error');
+      }
+    });
   }
 
   handleEventTitleInput(event) {
@@ -37,17 +105,45 @@ class AddEvent extends Component {
     });
   }
 
-  handleTimeStartInput(event) {
+  handleTimeStartHoursInput(event) {
     console.log(event.target.value);
     this.setState({
-      timeStartValue: event.target.value
+      timeStartHoursValue: event.target.value
     });
   }
 
-  handleTimeEndInput(event) {
+  handleTimeStartMinsInput(event) {
     console.log(event.target.value);
     this.setState({
-      timeEndValue: event.target.value
+      timeStartMinsValue: event.target.value
+    });
+  }
+
+  handleTimeStartAmPmInput(event) {
+    console.log(event.target.value);
+    this.setState({
+      timeStartAmPmValue: event.target.value
+    });
+  }
+
+  handleTimeEndHoursInput(event) {
+    console.log(event.target.value);
+    this.setState({
+      timeEndHoursValue: event.target.value
+    });
+  }
+
+  handleTimeEndMinsInput(event) {
+    console.log(event.target.value);
+    this.setState({
+      timeEndMinsValue: event.target.value
+    });
+  }
+
+  handleTimeEndAmPmInput(event) {
+    console.log(event.target.value);
+    this.setState({
+      timeEndAmPmValue: event.target.value
     });
   }
 
@@ -80,7 +176,7 @@ class AddEvent extends Component {
             placeholder="Location"
           /><br />*/}
           <label>Start</label>
-          <select>
+          <select value={this.state.timeStartHoursValue} onChange={this.handleTimeStartHoursInput}>
             <option value="12">12</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -94,7 +190,7 @@ class AddEvent extends Component {
             <option value="10">10</option>
             <option value="11">11</option>
           </select>
-          <select>
+          <select value={this.state.timeStartMinsValue} onChange={this.handleTimeStartMinsInput}>
             <option value="00">00</option>
             <option value="05">05</option>
             <option value="10">10</option>
@@ -108,12 +204,12 @@ class AddEvent extends Component {
             <option value="50">50</option>
             <option value="55">55</option>
           </select>
-          <select>
-            <option value='0'>AM</option>
-            <option value='12'>PM</option>
+          <select value={this.state.timeStartAmPmValue} onChange={this.handleTimeStartAmPmInput}>
+            <option value='am'>AM</option>
+            <option value='pm'>PM</option>
           </select><br />
           <label>End</label>
-          <select>
+          <select value={this.state.timeEndHoursValue} onChange={this.handleTimeEndHoursInput}>
             <option value="12">12</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -127,7 +223,7 @@ class AddEvent extends Component {
             <option value="10">10</option>
             <option value="11">11</option>
           </select>
-          <select>
+          <select value={this.state.timeEndMinsValue} onChange={this.handleTimeEndMinsInput}>
             <option value="00">00</option>
             <option value="05">05</option>
             <option value="10">10</option>
@@ -141,9 +237,9 @@ class AddEvent extends Component {
             <option value="50">50</option>
             <option value="55">55</option>
           </select>
-          <select>
-            <option value='0'>AM</option>
-            <option value='12'>PM</option>
+          <select value={this.state.timeEndAmPmValue} onChange={this.handleTimeEndAmPmInput}>
+            <option value='am'>AM</option>
+            <option value='pm'>PM</option>
           </select><br />
           {/*<input
             type="text"

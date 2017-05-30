@@ -35,6 +35,8 @@ class App extends Component {
     this.onEventSelect = this.onEventSelect.bind(this);
     this.onAddEventClick = this.onAddEventClick.bind(this);
     this.onEventEdit = this.onEventEdit.bind(this);
+    this.onAddEvent = this.onAddEvent.bind(this);
+    this.onEditEvent = this.onEditEvent.bind(this);
     
   }
 
@@ -112,6 +114,25 @@ onEventEdit(id) {
     }
   })
 }
+
+  onAddEvent(newEvent) {
+    console.log(newEvent);
+    this.setState(prevState => {
+      return {
+        eventsData: prevState.eventsData.concat([newEvent]),
+      };
+    });
+  }
+
+  onEditEvent(editedEvent) {
+    console.log(editedEvent);
+    this.setState(prevState => {
+      prevState.eventsData[prevState.selectedEvent] = editedEvent;
+      return {
+        eventsData: prevState.eventsData
+      };
+    });
+  }
 
 handleInputEventChange(event) {
   this.setState({handleInputEventChange: event.target.value});
@@ -201,11 +222,16 @@ onEventSelect(id) {
             <AddEvent
               className="dayView"
               selectedDay={this.state.selectedDay}
+              onAddEvent={this.onAddEvent}
             />
-            <EventEdit 
-              
-              selectedDay={this.state.selectedDay}
-            />
+            { this.state.isLoaded === true ?
+              <EventEdit 
+                className="dayView"
+                selectedDay={this.state.selectedDay}
+                eventsData={this.state.eventsData}
+                selectedEvent={this.state.selectedEvent}
+                onEditEvent={this.onEditEvent}
+              /> : '' }
               
           </Carousel>
         </div>

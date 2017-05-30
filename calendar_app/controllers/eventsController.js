@@ -37,6 +37,7 @@ eventsController.create = (req, res) => {
       location_id: req.body.location_id,
       time_start: req.body.time_start,
       time_end: req.body.time_end,
+      note: req.body.note,
       first_reminder: req.body.first_reminder,
       second_reminder: req.body.second_reminder
     })
@@ -69,6 +70,7 @@ eventsController.update = (req, res) => {
       location_id: req.body.location_id,
       time_start: req.body.time_start,
       time_end: req.body.time_end,
+      note: req.body.note,
       first_reminder: req.body.first_reminder,
       second_reminder: req.body.second_reminder
     }, req.params.id)
